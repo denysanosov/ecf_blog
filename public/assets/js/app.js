@@ -23,7 +23,7 @@ document.addEventListener('DOMContentLoaded', function() {
     });
 
     function loadPosts(page) {
-        fetch('../../../cli/getPost.php?page=' + page)
+        fetch('getPost?page=' + page)
         .then(response => response.text())
         .then(data => {
             document.getElementById('sectionPosts').innerHTML = data;

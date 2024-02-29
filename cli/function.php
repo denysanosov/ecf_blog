@@ -54,7 +54,7 @@ function errorMessage() {
 
 require_once dirname(__DIR__) . DIRECTORY_SEPARATOR . 'lib' . DIRECTORY_SEPARATOR . 'Connexion.php';
 
-function displayPosts() {
+function displayPosts($page) {
     $maConnexion = new Connexion();
     $maConnexion->connect();
     $connexion = $maConnexion->getConnexion();
@@ -71,16 +71,15 @@ function displayPosts() {
 
     $result = $query->fetchAll();
 
-    // var_dump($result);
 
     foreach ($result as $post) {
         echo <<<HTML
             <article class="postArticle">
-                <img src="../public/assets/img/doge.png" alt="">
+                <img src="https://images-eds-ssl.xboxlive.com/image?url=4rt9.lXDC4H_93laV1_eHM0OYfiFeMI2p9MWie0CvL99U4GA1gf6_kayTt_kBblFwHwo8BW8JXlqfnYxKPmmBRy_yZJaDwMVn4KFwVKCknVVq_vXxkQK4hFnotmQ5C7knE86nKRIgKUosotzf7QI1mOmFDeLbWybsCyMh2VaMes-&format=source" alt="">
                 <p class="nameAndDate">{$post['name']}<br>{$post['createdAt']}</p>
                 <strong>{$post['title']}</strong>
                 <p>{$post['body']}</p>
-                <form action="fullPost.php" method="GET">
+                <form action="fullPost" method="GET">
                     <input type="hidden" name="idPost" value="{$post['id']}">
                     <button type="submit" id="buttonShowFull">Voir en entier</button>
                 </form>

@@ -1,6 +1,6 @@
 <?php
 require "../config/route.php";
-
+// var_dump($match);
 if ($match !== false) {
     require "../template/header.php";
     if (is_callable($match['target'])) {

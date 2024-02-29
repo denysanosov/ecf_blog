@@ -5,6 +5,13 @@
     </section>
 
     <section id="sectionPosts">
-        <?php displayPosts($page) ?>
+        
+        <?php if (isset($_GET['page'])) {
+            $page = $_GET['page'];
+        };
+
+        // var_dump($match);
+
+        displayPosts($page) ?>
     </section>
 </main>

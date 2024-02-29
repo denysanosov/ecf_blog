@@ -8,6 +8,6 @@ $router->map('GET', '/login', 'login', 'login');
 $router->map('GET', '/fullPost', 'fullPost', 'fullPost');
 $router->map('GET', '/admin', 'admin', 'admin');
 $router->map('GET', '/adminEdit', 'adminEdit', 'adminEdit');
-$router->map('GET', '/admin', 'admin', 'admin');
+$router->map('GET', '/addPost', 'addPost', 'addPost');
 
 $match = $router->match();
