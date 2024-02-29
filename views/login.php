@@ -5,7 +5,6 @@
 } else {
     echo <<<HTML
         <main id="loginPage">
-
             <section>
                 <form id="form" action="../cli/loggingPDO.php" method="POST">
                     <h2>Login</h2>

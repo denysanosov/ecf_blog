@@ -5,7 +5,7 @@ if (isset($_SESSION['role'])) {
     if ($_SESSION['role'] === 'admin') {
 
         if ($_SERVER["REQUEST_METHOD"] == "POST") {
-            require_once dirname(__DIR__) . DIRECTORY_SEPARATOR . 'class' . DIRECTORY_SEPARATOR . 'Connexion.php';
+            require_once dirname(__DIR__) . DIRECTORY_SEPARATOR . 'lib' . DIRECTORY_SEPARATOR . 'Connexion.php';
 
             $maConnexion = new Connexion();
             $maConnexion->connect();
@@ -18,22 +18,22 @@ if (isset($_SESSION['role'])) {
             $now = date("Y-m-d H:i:s");
 
             if (empty($title) || empty($body)) {
-                header("Location: adminEdit.php?id={$postId}&error=emptyfields");
+                header("Location: adminEdit?id={$postId}&error=emptyfields");
                 exit();
             } else {
                 $sql = "UPDATE posts SET title=?, body=?, createdAt = ? WHERE id=?";
                 $stmt = $connexion->prepare($sql);
                 $stmt->execute([$title, $body, $now, $postId]);
-                header("Location: adminEdit.php?id={$postId}&success=update");
+                header("Location: adminEdit?id={$postId}&success=update");
                 exit();
             }
         } else {
-            header("Location: adminEdit.php?error=accessdenied");
+            header("Location: adminEdit?error=accessdenied");
             exit();
         }
     } else {
-        header('Location: login.php');
+        header('Location: login');
     }
 } else {
-    header('Location: login.php');
+    header('Location: login');
 }

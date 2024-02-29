@@ -1,27 +1,23 @@
 <main id="mainFullPost">
-<?php
-    $idPost = $_GET['idPost'];
+    <?php
+        $idPost = $_GET['idPost'];
 
-    require_once dirname(__DIR__) . DIRECTORY_SEPARATOR . 'lib' . DIRECTORY_SEPARATOR . 'Connexion.php';
+        require_once dirname(__DIR__) . DIRECTORY_SEPARATOR . 'lib' . DIRECTORY_SEPARATOR . 'Connexion.php';
 
-    $maConnexion = new Connexion();
+        $maConnexion = new Connexion();
+        $maConnexion->connect();
+        $connexion = $maConnexion->getConnexion();
 
-    $maConnexion->connect();
+        $queryPost = $connexion->prepare("SELECT posts.*, user.name
+                                        FROM posts
+                                        INNER JOIN user ON posts.userid = user.id
+                                        WHERE posts.id = ?");
+        $queryPost->execute([$idPost]);
+        $post = $queryPost->fetch(PDO::FETCH_ASSOC);
 
-    $connexion = $maConnexion->getConnexion();
-
-    $queryPost = $connexion->prepare("SELECT posts.*, user.name
-                                    FROM posts
-                                    INNER JOIN user ON posts.userid = user.id
-                                    WHERE posts.id = ?");
-    $queryPost->execute([$idPost]);
-    $post = $queryPost->fetch(PDO::FETCH_ASSOC);
-
-    $queryComments = $connexion->prepare("SELECT * FROM comments WHERE postId = ?");
-    $queryComments->execute([$idPost]);
-    $comments = $queryComments->fetchAll(PDO::FETCH_ASSOC);
-
-    // var_dump($post);
+        $queryComments = $connexion->prepare("SELECT * FROM comments WHERE postId = ?");
+        $queryComments->execute([$idPost]);
+        $comments = $queryComments->fetchAll(PDO::FETCH_ASSOC);
     ?>
 
     <section id="fullPost">
@@ -43,13 +39,3 @@
     <?php endforeach; ?>
     </section>
 </main>
-
-
-
-
-    
-
-
-
-
-<?php include_once dirname(__DIR__) . DIRECTORY_SEPARATOR . 'template' . DIRECTORY_SEPARATOR . 'footer.php' ?>
