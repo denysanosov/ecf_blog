@@ -5,7 +5,9 @@ $router = new AltoRouter();
 
 $router->map('GET', '/', 'posts', 'posts');
 $router->map('GET', '/login', 'login', 'login');
-$router->map('GET', '/posts/[*:slug]-[i:id]', 'posts/post', 'post');
+$router->map('GET', '/fullPost', 'fullPost', 'fullPost');
+$router->map('GET', '/admin', 'admin', 'admin');
+$router->map('GET', '/adminEdit', 'adminEdit', 'adminEdit');
 $router->map('GET', '/admin', 'admin', 'admin');
 
 $match = $router->match();
